@@ -1,0 +1,23 @@
+.textfield {
+  display: flex;
+  font-size: 1rem;
+  border-spacing: 200px;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 0.5em 1em;
+  border-radius: 20px;
+}
+
+.bodytextfield {
+  font-size: 1rem;
+  margin-left: 10px;
+  margin-top: 10px;
+  padding: 0.3em 1em;
+  resize: both;
+  border-radius: 20px;
+}
+
+.button {
+  margin-left: 30px;
+  margin-top: 10px;
+}
