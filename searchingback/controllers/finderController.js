@@ -1,7 +1,6 @@
 import recordsModel from "../models/recordsModel.js";
 
-export default class recordcontroller {
-  async sendRecords(req, res, next) {
+const sendRecords = async (req, res, next)=>{
     try {
       const name = req.body.name;
       const categories = req.body.categories;
@@ -21,7 +20,7 @@ export default class recordcontroller {
     }
   }
 
-  getRecords(req, res) {
+  const getRecords=(req, res)=>{
     // let categories = req.query.categories;
 
     try {
@@ -41,7 +40,7 @@ export default class recordcontroller {
     }
   }
 
-  async updateRecords(req, res, next) {
+  const updateRecords=async(req, res, next)=>{
     const id = req.query.id;
     try {
       const update = {
@@ -68,7 +67,7 @@ export default class recordcontroller {
     }
   }
 
-  deleteRecords(req, res) {
+ const deleteRecords=(req, res)=>{
     const { id } = req.params;
     try {
       recordsModel.findByIdAndDelete(
@@ -87,4 +86,10 @@ export default class recordcontroller {
       console.log(error);
     }
   }
+
+export default {
+  sendRecords,
+  getRecords,
+  updateRecords,
+  deleteRecords
 }

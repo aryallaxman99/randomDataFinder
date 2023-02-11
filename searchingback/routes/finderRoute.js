@@ -1,7 +1,6 @@
 import { Router } from "express";
 import multer from "multer";
-import recordcontroller from "../controllers/finderController.js";
-
+import finderController from '../controllers/finderController.js'
 const router = Router();
 
 const storage = multer.diskStorage({
@@ -14,10 +13,8 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-const recordController = new recordcontroller();
-
-router.post("/send", upload.single("image"), recordController.sendRecords);
-router.get("/search", recordController.getRecords);
-router.put("/update", recordController.updateRecords);
-router.delete("/delete/:id", recordController.deleteRecords);
+router.post("/send", upload.single("image"), finderController.sendRecords);
+router.get("/search", finderController.getRecords);
+router.put("/update", finderController.updateRecords);
+router.delete("/delete/:id", finderController.deleteRecords);
 export default router;
