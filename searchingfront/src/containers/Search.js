@@ -1,43 +1,40 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const Search = () => {
-  const [fetchedData, setFetchedData] = useState(null);
-  const [randomData, setRandomData] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:4004/finder/search`)
-      .then((res) => res.json())
-      .then((value) => setFetchedData(value));
-  }, []);
+  const [fetchedData, setFetchedData] = useState([]);
+  const [search, setSearch] = useState("");
 
   const random = () => {
-    if (fetchedData) {
-      let data = fetchedData[Math.floor(Math.random() * fetchedData.length)];
-      setRandomData([data]);
-    }
+    const data = fetch(`http://localhost:4004/finder/search?q=${search}`)
+      .then((res) => res.json())
+      .then((value) => setFetchedData(value.data));
   };
 
   return (
     <div className="App">
       <>
-        <button onClick={() => random()}>Random</button>
+        <input
+          type="text"
+          onKeyUp={(event) => setSearch(event.target.value)}
+        ></input>
+        <button onClick={() => random()}>Search</button>
       </>
 
       <>
-        {randomData && randomData.length > 0
-          ? randomData.map((item) => (
+        {fetchedData && fetchedData.length > 0
+          ? fetchedData.map((item, id) => (
               <ul>
                 <li>
                   <strong>Name: </strong>
-                  {item.title}
+                  {item.item.title}
                 </li>
                 <li>
-                  <strong>Categories:</strong> {item.categories}
+                  <strong>Categories:</strong> {item.item.categories}
                 </li>
                 <li>
-                  <strong>Types:</strong> {item.types}
+                  <strong>Types:</strong> {item.item.types}
                 </li>
-                <li>{item.body}</li>
+                <li>{item.item.body}</li>
               </ul>
             ))
           : null}
